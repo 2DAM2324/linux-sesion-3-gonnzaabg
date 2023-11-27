@@ -1,0 +1,83 @@
+Ejercicio 1: Escriba, al menos, cinco variables de entorno junto con el valor que tienen.
+variable1=1
+variable2=2
+variable3=3
+variable4=4
+variable5=5
+
+Para ver el contenido echo $(nombre variable)
+
+Ejercicio 2. Ejecute las órdenes del cuadro e indique qué ocurre y cómo puede resolver la situación para que la
+variable NOMBRE se reconozca en el shell hijo.
+
+Al hacer bash se borra el contenido de la variable NOMBRE, para arreglarlo debes exportar primero la variable con export NOMBRE, y al hacer bash no borra su contenido
+
+Ejercicio 3: Compruebe qué ocurre en las expresiones del ejemplo anterior si se quitan las comillas dobles del
+final y se ponen después de los dos puntos. ¿Qué sucede si se sustituyen las comillas dobles por comillas simples?
+
+Sucede que se rompe el orden del ls -l dificultando mucho la legibilidad. Si cambias las comillas dobles por los ´ sucede lo mismo que si pones la " detras de los dos puntos.
+
+Ejercicio 4: Pruebe la siguiente asignación:
+¿Qué ha ocurrido?
+
+Ocurre que no hace el cálculo de sumar uno, te introduce directamente en la variable "+1"
+
+5. Construya un guion que acepte como argumento una cadena de texto (por ejemplo, su nombre) y
+que visualice en pantalla la frase Hola y el nombre dado como argumento.
+
+Tienes que abrir un editor de texto y poner echo "Hola Mundo" $0 para que al ejecutarlo muestre Hola Mundo y el nombre del archivo
+
+Ejercicio 6. Varíe el guion anterior para que admita una lista de nombres.
+
+!#/bin/bash
+var=$1
+
+echo "Hola Mundo" $var
+
+Ejercicio 7. Cree tres variables llamadas VAR1, VAR2 y VAR3 con los siguientes valores respectivamente “hola”,
+“adios” y “14”.
+a)Después de crear las variables, printf "15%s" $VAR1 $VAR2 $VAR3
+b)Son variables locales
+c)unset VAR2
+d)No, no te lo permite 
+e)VAR4_vector
+f)echo "${VAR4_vector[2]}"
+
+Ejercicio 8. Cree un alias que se llame ne (nombrado así para indicar el número de elementos) y que devuelva el
+número de archivos que existen en el directorio actual. ¿Qué cambiaría si queremos que haga lo mismo pero en el
+directorio home correspondiente al usuario que lo ejecuta?
+
+Para crear un alias con esa función y ese nombre: alias ne='ls -al'
+Para hacerlo solo para el directorio home: alias ne='ls -alh ~/'
+
+Ejercicio 9. Indique la línea de orden necesaria para buscar todos los archivos a partir del directorio home que
+tengan un tamaño menor de un bloque. ¿Cómo la modificaría para que además imprima el resultado en un archivo
+que se cree dentro del directorio donde nos encontremos y que se llame archivosP?
+
+find ~/ -type f -size -1024c
+find ~/ -type f -size -1024c > archivos
+
+Ejercicio 10. Indique cómo buscaría todos aquellos archivos del directorio actual que contengan la palabra
+“ejemplo”.
+
+ls -l *ejemplo*
+
+Ejercicio 11 Complete la información de find y grep utilizando para ello la orden man.
+
+man greb
+
+Ejercicio 12 Indique cómo buscaría si un usuario dispone de una cuenta en el sistema.
+cat /etc/passwd | cut -d: -f1 | grep (nombre de ese usuario)
+
+Ejercicio 13. Indique cómo contabilizar el número de ficheros de la propia cuenta de usuario que no tengan
+permiso de lectura para el resto de usuarios.
+
+find ~ ! -perm -o+r | wc -l
+
+Ejercicio 14. Modifique el ejercicio 8 de forma que, en vez de un alias, sea un guion llamado numE el que
+devuelva el número de archivos que existen en el directorio que se le pase como argumento.
+
+#!/bin/bash
+cd;
+ls -A | wc -l;
+
